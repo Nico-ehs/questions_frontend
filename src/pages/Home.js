@@ -8,22 +8,28 @@ const BackendUrl = "http://localhost:3000/"
 
 class Home extends Component {
 
-  genQuestions = () => {
+  state={
+    date: null
+  }
 
-    
+  genQuestions = () => {
+    if (!this.state.data){
+      return null
+    }
+    console.log(this.state.data)
+    return this.state.data.map(question => <QuestionCard key={question.id} cardData={question} />)
   }
 
   componentDidMount() {
-    // fetch(BackendUrl+"/questions")
-    //   .then(response => response.json())
-    //   .then((res) => this.setState({ events: res }))
+    fetch(BackendUrl+"/questions")
+      .then(response => response.json())
+      .then((res) => this.setState({ data: res }))
   }
 
   render() {
 
     return (
       <div>
-        test1
         <CardDeck>
         {this.genQuestions()}
         </CardDeck>

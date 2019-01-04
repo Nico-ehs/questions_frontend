@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/lib/Navbar'
 import Nav from 'react-bootstrap/lib/Nav'
-
 import {Link} from 'react-router-dom'
 
+
+
+import * as GolbalV form  '../globalUse.js'
 
 
 
 class NavContainer extends Component {
 
-
-  genUserbets = () => {
-
-  }
-
   render() {
-    const BetsPage = {
-      pathname: '/user_predictions',
-      state: { log: "test1", user: this.props.user}
-    }
 
     return (
       <div>
       <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">Questions</Navbar.Brand>
+      <Navbar.Brand><Link to="/">Questions</Link></Navbar.Brand>
       <Nav className="mr-auto">
-      {this.props.user ? <Link to="/userdata">userdata</Link> : null }
-      {this.props.user ? `Money: ${this.props.user.money}` : null}
+      {this.props.user ? <Link to="/userdata">User Page</Link> : null }
+      </Nav>
+      <Nav className="mr-auto">
+      {this.props.user ? <Link to="/userdata">New Question</Link> : null}
       </Nav>
 
 
-      <Link to="/userdata">Login</Link>
+      {this.props.user ? <div><p>Welcome {this.props.user.name}</p>
+      <p onClick={() => this.props.setUser(null)} >Logout</p></div> :
+      <Link to="/login">Login</Link>}
       </Navbar>
       </div>
     );
